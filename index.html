@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AI Career Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style> /* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+  color: #e0e0f0;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/* Headings */
+h1 {
+  font-size: 2.5rem;
+  color: #00f7ff;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+h3, h4 {
+  color: #00e0ff;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph */
+p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+/* Grid for checkboxes */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Labels */
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #e0e0f0;
+}
+
+/* Inputs */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #00f7ff;
+  transform: scale(1.2);
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 0.25rem;
+  accent-color: #00f7ff;
+}
+
+/* Select */
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  background: #1a1a2e;
+  color: #00f7ff;
+  font-size: 1rem;
+}
+
+/* Button */
+button.primary {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #00f7ff, #00d4ff);
+  border: none;
+  border-radius: 10px;
+  color: #0f0f1a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button.primary:hover {
+  background: linear-gradient(90deg, #00d4ff, #00f7ff);
+}
+
+/* Result Section */
+.result {
+  background: rgba(0, 255, 255, 0.05);
+  border-left: 4px solid #00f7ff;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Career Predictor</h1>
+    <p>Select your interests and strengths — we'll recommend AI career paths.</p>
+
+    <form id="predictForm">
+      <section class="card">
+        <h3>Topics you enjoy (check all that apply)</h3>
+        <div class="grid">
+          <label><input type="checkbox" name="topics" value="math"> Math & Statistics</label>
+          <label><input type="checkbox" name="topics" value="programming"> Programming</label>
+          <label><input type="checkbox" name="topics" value="research"> Research / Theory</label>
+          <label><input type="checkbox" name="topics" value="ml"> Machine Learning</label>
+          <label><input type="checkbox" name="topics" value="nlp"> Natural Language Processing</label>
+          <label><input type="checkbox" name="topics" value="cv"> Computer Vision</label>
+          <label><input type="checkbox" name="topics" value="data"> Data Analysis</label>
+          <label><input type="checkbox" name="topics" value="devops"> DevOps / Deployment</label>
+          <label><input type="checkbox" name="topics" value="product"> Product & Strategy</label>
+          <label><input type="checkbox" name="topics" value="ethics"> Ethics & Policy</label>
+          <label><input type="checkbox" name="topics" value="healthcare"> Domain: Healthcare</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Preferred work style</h3>
+        <label><input type="radio" name="work_style" value="research" checked> Research / Papers</label><br>
+        <label><input type="radio" name="work_style" value="product"> Product & Impact</label><br>
+        <label><input type="radio" name="work_style" value="engineering"> Systems / Engineering</label><br>
+        <label><input type="radio" name="work_style" value="analytics"> Data Analysis / Insights</label>
+      </section>
+
+      <section class="card">
+        <h3>Rate your comfort (0–5)</h3>
+        <label>Math & Stats: <input type="range" name="skill_math" min="0" max="5" value="3"></label><br>
+        <label>Programming: <input type="range" name="skill_prog" min="0" max="5" value="3"></label><br>
+        <label>Data Analysis: <input type="range" name="skill_data" min="0" max="5" value="3"></label><br>
+      </section>
+
+      <section class="card">
+        <h3>Optional: Career goals (select)</h3>
+        <select name="goal">
+          <option value="startup">Work at a startup</option>
+          <option value="industry">Large tech company</option>
+          <option value="academia">Academia / PhD</option>
+          <option value="consult">Consulting / Analytics</option>
+        </select>
+      </section>
+
+      <button type="submit" class="primary">Get Recommendations</button>
+    </form>
+
+    <div id="result" class="card result" style="display:none;">
+      <h3>Recommended Careers</h3>
+      <div id="recommendations"></div>
+      <h4>Why these?</h4>
+      <div id="explanations"></div>
+    </div>
+
+  </div>
+
+  <script>
+const form = document.getElementById('predictForm');
+const resultCard = document.getElementById('result');
+const recommendationsDiv = document.getElementById('recommendations');
+const explanationsDiv = document.getElementById('explanations');
+const OPENAI_API_KEY = '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';
+const OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
+const PROXY_URL = `https://corsproxy.io/?${encodeURIComponent(OPENAI_ENDPOINT)}`;
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const topics = formData.getAll('topics');
+  const workStyle = formData.get('work_style');
+  const skillMath = formData.get('skill_math');
+  const skillProg = formData.get('skill_prog');
+  const skillData = formData.get('skill_data');
+  const goal = formData.get('goal');
+
+  const prompt = `
+You are an AI career advisor. Based on the following user input, recommend 3 AI career paths and explain why each fits:
+
+Topics of interest: ${topics.join(', ')}
+Preferred work style: ${workStyle}
+Comfort level (0–5):
+- Math & Stats: ${skillMath}
+- Programming: ${skillProg}
+- Data Analysis: ${skillData}
+Career goal: ${goal}
+
+Respond with a list of careers and short explanations for each.
+`;
+
+  try {
+    const response = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7
+      })
+    });
+
+    const data = await response.json();
+    const text = data?.choices?.[0]?.message?.content || 'No response received.';
+    const [careerSection, explanationSection] = text.split(/Why these\?:?/i);
+
+    recommendationsDiv.innerHTML = `<p>${careerSection?.trim().replace(/\n/g, '<br>')}</p>`;
+    explanationsDiv.innerHTML = `<p>${explanationSection?.trim().replace(/\n/g, '<br>') || ''}</p>`;
+    resultCard.style.display = 'block';
+  } catch (error) {
+    console.error('Error calling ChatGPT API:', error);
+    recommendationsDiv.innerHTML = '<p>Something went wrong. Please try again.</p>';
+    resultCard.style.display = 'block';
+  }
+});
+</script>
+
+</body>
+</html>
